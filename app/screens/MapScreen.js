@@ -3,20 +3,21 @@ import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, SafeAreaView, View, Image} from 'react-native';
 import tw from "tailwind-react-native-classnames";
 import NavOptions from '../components/NavOptions';
+import MapView from 'react-native-maps';
+import Map from '../components/Map';
 
-const HomeScreen = () => {
+
+const MapScreen = () => {
     return (
-        <SafeAreaView style={tw`bg-white h-full`}>
-          <NavOptions />
-            <Text style={[tw`text-red-500 p-10`, styles.text]}>
-              HomePage
-            </Text>
-            <StatusBar style="dark" />
-        </SafeAreaView>
+      <View>
+        <View style={tw`h-full`}>
+          <Map />
+        </View>
+      </View>
     )
 }
 
-export default HomeScreen
+export default MapScreen
 
 const styles = StyleSheet.create({
     container: {
