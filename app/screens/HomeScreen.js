@@ -2,10 +2,12 @@ import React from 'react'
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, SafeAreaView, View, Image} from 'react-native';
 import tw from "tailwind-react-native-classnames";
+import NavOptions from '../components/NavOptions';
 
 const HomeScreen = () => {
     return (
         <SafeAreaView style={tw`bg-white h-full`}>
+          <NavOptions />
             <Text style={[tw`text-red-500 p-10`, styles.text]}>
               HomePage
             </Text>
