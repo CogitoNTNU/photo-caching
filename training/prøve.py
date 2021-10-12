@@ -17,3 +17,5 @@ print('Resized Dimensions : ', resized.shape)
 cv.imshow("Resized image", resized)
 cv.waitKey(0)
 cv.destroyAllWindows()
+
+
