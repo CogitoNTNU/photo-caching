@@ -1,3 +1,52 @@
+/*
+import React, { useCallback, useMemo, useRef } from 'react';
+import { View, Text, StyleSheet } from 'react-native';
+import BottomSheet from '@gorhom/bottom-sheet';
+
+const App = () => {
+  // ref
+  const bottomSheetRef = useRef(null);
+
+  // variables
+  const snapPoints = useMemo(() => ['25%', '50%'], []);
+
+  // callbacks
+  const handleSheetChanges = useCallback((index) => {
+    console.log('handleSheetChanges', index);
+  }, []);
+
+  // renders
+  return (
+    <View style={styles.container}>
+      <BottomSheet
+        ref={bottomSheetRef}
+        index={1}
+        snapPoints={snapPoints}
+        onChange={handleSheetChanges}
+      >
+        <View style={styles.contentContainer}>
+          <Text>Awesome 🎉</Text>
+        </View>
+      </BottomSheet>
+    </View>
+  );
+};
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    padding: 24,
+    backgroundColor: 'grey',
+  },
+  contentContainer: {
+    flex: 1,
+    alignItems: 'center',
+  },
+});
+
+export default App;
+*/
+
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
@@ -10,6 +59,7 @@ import { store } from './store';
 //Screens
 import HomeScreen from './screens/HomeScreen';
 import MapScreen from './screens/MapScreen';
+import CameraScreen from './screens/CameraScreen';
 
 export default function App() {
 
@@ -20,13 +70,18 @@ export default function App() {
       <Provider store={store}>
         <Stack.Navigator>
           <Stack.Screen
-            name="Home"
-            component={HomeScreen}
+            name="Map"
+            component={MapScreen}
             options={{headerShown:false}}
           />
           <Stack.Screen
-            name="Map"
-            component={MapScreen}
+            name="Cam"
+            component={CameraScreen}
+            options={{headerShown:false}}
+          />
+          <Stack.Screen
+            name="Home"
+            component={HomeScreen}
             options={{headerShown:false}}
           />
         </Stack.Navigator>
