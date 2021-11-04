@@ -1,10 +1,10 @@
-import React from 'react'
+import React, { useState, useCallback, useMemo, useRef } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, SafeAreaView, View, Image} from 'react-native';
 import tw from "tailwind-react-native-classnames";
-import NavOptions from '../components/NavOptions';
-import MapView from 'react-native-maps';
 import Map from '../components/Map';
+
+import BottomSheet, { BottomSheetView } from "@gorhom/bottom-sheet";
 
 const markers = [
   {
@@ -24,12 +24,50 @@ const markers = [
 ]
 
 const MapScreen = () => {
+  const [viewMapMarkerSheet, setViewMapMarkerSheet] = useState(-1);
+
+    // hooks
+    const sheetRef = useRef(null);
+
+    // variables
+    const snapPoints = useMemo(() => ["50%"], []);
+
+    // callbacks
+    const handleSheetChange = useCallback((index) => {
+      console.log("handleSheetChange", index);
+    }, []);
+
+    const handleSnapPress = useCallback((index) => {
+      sheetRef.current?.snapToIndex(index);
+    }, []);
+
+    const handleClosePress = useCallback(() => {
+      sheetRef.current?.close();
+      setViewMapMarkerSheet(-1)
+    }, []);
+
+    const handleMapMarkerPress = (e) => {
+        console.log(e);
+        setViewMapMarkerSheet(0)
+    }
+
     return (
-      <View>
         <View style={tw`h-full`}>
-          <Map markers={markers}/>
+          <Map markers={markers} handleMapMarkerPress={handleMapMarkerPress}/>
+          <BottomSheet
+            index={viewMapMarkerSheet}
+            ref={sheetRef}
+            snapPoints={snapPoints}
+            onChange={handleSheetChange}
+            onClose={handleClosePress}
+            enablePanDownToClose
+            style={styles.contentContainer}
+          >
+            <BottomSheetView>
+              <Text>Awesome 🔥</Text>
+            </BottomSheetView>
+          </BottomSheet>
         </View>
-      </View>
     )
 }
 
@@ -44,6 +82,16 @@ const styles = StyleSheet.create({
     },
     text: {
       fontSize: 20
-    }
+    },
+    contentContainer: {
+      shadowColor: "#000",
+      shadowOffset: {
+        width: 0,
+        height: 4,
+      },
+      shadowOpacity: 0.30,
+      shadowRadius: 4.65,
+      elevation: 8,
+    },
   });
   
