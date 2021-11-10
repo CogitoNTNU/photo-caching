@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
@@ -10,13 +10,44 @@ import { store } from './store';
 //Screens
 import HomeScreen from './screens/HomeScreen';
 import MapScreen from './screens/MapScreen';
+
+//import AsyncStorage from '@react-native-community/async-storage';
 import CameraScreen from './screens/CameraScreen';
+
 
 export default function App() {
 
   const Stack = createNativeStackNavigator();
 
   return (
+
+  /*const [isFirstLaunch, setIsFirstLaunch] = React.useState(null);
+
+  useEffect(() => {
+    AsyncStorage.getItem('alreadyLaunched').then(value => {
+      if(value == null){
+        AsyncStorage.setItem('alreadyLaunched', 'true');
+        setIsFirstLaunch(true);
+      } else {
+        setIsFirstLaunch(false);
+      }
+    })
+  }, []);
+
+  if ( isFirstLaunch === null) {
+    return null;
+  } else if (isFirstLaunch === true){ // FIRST LAUNCH
+    return (
+      <Provider store={store}>
+        <MapScreen />
+      </Provider>
+    )
+  } else { // NOT FIRST LAUNCH
+    return <Provider store={store}>
+        <IntroScreen />
+      </Provider>
+  }*/
+
     <NavigationContainer>
       <Provider store={store}>
         <Stack.Navigator>
