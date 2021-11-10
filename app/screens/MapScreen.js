@@ -62,8 +62,20 @@ const MapScreen = () => {
             onClose={handleClosePress}
             enablePanDownToClose
             style={styles.contentContainer}
+            
           >
             <BottomSheetView>
+            <Image
+                                style={{
+                                    top: 0,
+                                    width: '100%',
+                                    height: '100%',
+                                    resizeMode: "cover",
+                                }}
+                                source={{
+                                    uri: 'https://i.guim.co.uk/img/media/d1a9d4e48fda2fb3175d248ddf47bffb8fa93230/0_0_3840_5760/master/3840.jpg?width=700&quality=85&auto=format&fit=max&s=eecc002c9cc8dffcf7b1e1a19c125d9a'
+                                }}
+                />
               <Text>Awesome 🔥</Text>
             </BottomSheetView>
           </BottomSheet>
