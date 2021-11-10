@@ -1,20 +1,26 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { useEffect } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 //Create store.js
 import { Provider } from "react-redux";
-import HomeScreen from './screens/HomeScreen';
-import IntroScreen from './screens/IntroScreen';
 import { store } from './store';
+
+//Screens
+import HomeScreen from './screens/HomeScreen';
 import MapScreen from './screens/MapScreen';
+
 //import AsyncStorage from '@react-native-community/async-storage';
+import CameraScreen from './screens/CameraScreen';
+
 
 export default function App() {
+
+  const Stack = createNativeStackNavigator();
+
   return (
-    <IntroScreen />
-  )
-  
+
   /*const [isFirstLaunch, setIsFirstLaunch] = React.useState(null);
 
   useEffect(() => {
@@ -41,6 +47,29 @@ export default function App() {
         <IntroScreen />
       </Provider>
   }*/
+
+    <NavigationContainer>
+      <Provider store={store}>
+        <Stack.Navigator>
+          <Stack.Screen
+            name="Map"
+            component={MapScreen}
+            options={{headerShown:false}}
+          />
+          <Stack.Screen
+            name="Cam"
+            component={CameraScreen}
+            options={{headerShown:false}}
+          />
+          <Stack.Screen
+            name="Home"
+            component={HomeScreen}
+            options={{headerShown:false}}
+          />
+        </Stack.Navigator>
+      </Provider>
+    </NavigationContainer>
+  );
 }
 
 const styles = StyleSheet.create({
