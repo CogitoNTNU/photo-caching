@@ -3,6 +3,7 @@ import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, SafeAreaView, View, Image} from 'react-native';
 import tw from "tailwind-react-native-classnames";
 import Map from '../components/Map';
+import CustomFooter from '../components/CustomFooter';
 
 import BottomSheet, { BottomSheetView } from "@gorhom/bottom-sheet";
 
@@ -25,7 +26,7 @@ const markers = [
 
 const MapScreen = () => {
   const [viewMapMarkerSheet, setViewMapMarkerSheet] = useState(-1);
-
+  const [selectedMapMarker, setSelectedMapMarker ] = useState();
     // hooks
     const sheetRef = useRef(null);
 
@@ -47,8 +48,8 @@ const MapScreen = () => {
     }, []);
 
     const handleMapMarkerPress = (e) => {
-        console.log(e);
-        setViewMapMarkerSheet(0)
+        setSelectedMapMarker(e);
+        setViewMapMarkerSheet(0);
     }
 
     return (
@@ -62,22 +63,41 @@ const MapScreen = () => {
             onClose={handleClosePress}
             enablePanDownToClose
             style={styles.contentContainer}
-            
+            footerComponent={CustomFooter}
           >
-            <BottomSheetView>
-            <Image
-                                style={{
-                                    top: 0,
-                                    width: '100%',
-                                    height: '100%',
-                                    resizeMode: "cover",
-                                }}
-                                source={{
-                                    uri: 'https://i.guim.co.uk/img/media/d1a9d4e48fda2fb3175d248ddf47bffb8fa93230/0_0_3840_5760/master/3840.jpg?width=700&quality=85&auto=format&fit=max&s=eecc002c9cc8dffcf7b1e1a19c125d9a'
-                                }}
+              {selectedMapMarker &&
+              <View 
+                style={{
+                  width:'80%',
+                  height:'74%',
+                  alignSelf: 'center',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  shadowColor: "#000",
+                  shadowOffset: {
+                    width: 0,
+                    height: 6,
+                  },
+                  shadowOpacity: 0.37,
+                  shadowRadius: 7.49,
+
+                  elevation: 12,
+                }}
+              >
+                <Image
+                  style={{
+                      top: 0,
+                      width: '100%',
+                      height: '100%',
+                      resizeMode: "cover",
+                      borderRadius: 8
+                  }}
+                  source={{
+                      uri: selectedMapMarker.img
+                  }}
                 />
-              <Text>Awesome 🔥</Text>
-            </BottomSheetView>
+              </View>
+              }
           </BottomSheet>
         </View>
     )

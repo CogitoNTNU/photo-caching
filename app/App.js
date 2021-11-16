@@ -16,12 +16,10 @@ import CameraScreen from './screens/CameraScreen';
 
 
 export default function App() {
-
   const Stack = createNativeStackNavigator();
-
   return (
-
-  /*const [isFirstLaunch, setIsFirstLaunch] = React.useState(null);
+  /*
+  const [isFirstLaunch, setIsFirstLaunch] = React.useState(null);
 
   useEffect(() => {
     AsyncStorage.getItem('alreadyLaunched').then(value => {
@@ -46,8 +44,8 @@ export default function App() {
     return <Provider store={store}>
         <IntroScreen />
       </Provider>
-  }*/
-
+  }
+  */
     <NavigationContainer>
       <Provider store={store}>
         <Stack.Navigator>
