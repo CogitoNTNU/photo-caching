@@ -4,6 +4,13 @@ import { StyleSheet, Text, SafeAreaView, View, Image} from 'react-native';
 import tw from "tailwind-react-native-classnames";
 import Map from '../components/Map';
 import CustomFooter from '../components/CustomFooter';
+import CameraContainer from '../components/Camera';
+import { store } from '../store';
+
+import { setVisible } from '../slices/camSlice';
+import { useDispatch } from 'react-redux';
+
+import TabBar from '../components/TabBar'; 
 
 import BottomSheet, { BottomSheetView } from "@gorhom/bottom-sheet";
 
@@ -27,7 +34,11 @@ const markers = [
 const MapScreen = () => {
   const [viewMapMarkerSheet, setViewMapMarkerSheet] = useState(-1);
   const [selectedMapMarker, setSelectedMapMarker ] = useState();
-    // hooks
+
+  const [showCamView, setShowCamView ] = useState(false);
+    
+  const dispatch = useDispatch();
+  // hooks
     const sheetRef = useRef(null);
 
     // variables
@@ -35,7 +46,9 @@ const MapScreen = () => {
 
     // callbacks
     const handleSheetChange = useCallback((index) => {
-      console.log("handleSheetChange", index);
+      if(index === -1){
+        dispatch(setVisible(false));
+      }
     }, []);
 
     const handleSnapPress = useCallback((index) => {
@@ -52,9 +65,17 @@ const MapScreen = () => {
         setViewMapMarkerSheet(0);
     }
 
+    store.subscribe(()=>{
+      setShowCamView(store.getState().cam.open);
+    });
+
     return (
         <View style={tw`h-full`}>
+          {showCamView&&
+            <CameraContainer/>
+          }
           <Map markers={markers} handleMapMarkerPress={handleMapMarkerPress}/>
+          <TabBar/>
           <BottomSheet
             index={viewMapMarkerSheet}
             ref={sheetRef}

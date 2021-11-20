@@ -14,6 +14,9 @@ import Animated, {
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import { toRad } from 'react-native-redash';
 
+import { setVisible } from '../slices/camSlice';
+import { useDispatch } from 'react-redux';
+
 const AnimatedRectButton = Animated.createAnimatedComponent(RectButton);
 
 const CustomFooter = ({ animatedFooterPosition }) => {
@@ -44,8 +47,10 @@ const CustomFooter = ({ animatedFooterPosition }) => {
   //#endregion
 
   //#region callbacks
+  const dispatch = useDispatch();
   const handleArrowPress = useCallback(() => {
-    console.log('ok');
+    dispatch(setVisible(true));
+    //console.log(store.getState())
   });
     /*
     // if sheet is collapsed, then we extend it,

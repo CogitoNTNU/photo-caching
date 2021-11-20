@@ -1,8 +1,8 @@
 import { configureStore } from "@reduxjs/toolkit";
-import navReducer from './slices/navSlice';
+import camReducer from './slices/camSlice';
 
 export const store = configureStore({
     reducer: {
-        nav: navReducer
+        cam: camReducer
     }
 })

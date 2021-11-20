@@ -279,6 +279,7 @@ const Map = (props) => {
             pitchEnabled={false}
             toolbarEnabled={false}
             onRegionChange={mapRegionChange}
+            mapPadding={{bottom:50, left:10, right: 10, top: 50}}
         >
             {props.markers.map((prop, key) => {
                 return (
@@ -306,6 +307,12 @@ const Map = (props) => {
                                 }}
                             />
                         </Marker>
+                </View>
+                );
+            })}
+            {props.markers.map((prop, key) => {
+                return (
+                    <View key={`circle-${key}`}>
                         <Circle
                             center={{
                                 latitude: prop.lat,
